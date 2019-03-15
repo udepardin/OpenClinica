@@ -1,0 +1,41 @@
+<div class="row justify-content-left">
+    <div class="col-8">
+        <div *ngIf="country">
+            <h2><span>Country Code : </span> {{country.alpha3Code}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{country.name}}</span>
+                </dd>
+                <dt><span>Capital</span></dt>
+                <dd>
+                    <span>{{country.capital}}</span>
+                </dd>
+                <dt><span>Region</span></dt>
+                <dd>
+                    <span>{{country.region}}</span>
+                </dd>
+                <dt><span>Sub Region</span></dt>
+                <dd>
+                    <span>{{country.subregion}}</span>
+                </dd>
+                <dt><span>Population</span></dt>
+                <dd>
+                    <span>{{country.population}}</span>
+                </dd>
+                <dt><span>Demonym</span></dt>
+                <dd>
+                    <span>{{country.demonym}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

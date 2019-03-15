@@ -17,8 +17,16 @@
                 </a>
             </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="continent" (click)="collapseNavbar()" id="continent-menu">
+                    <span>
+                        <fa-icon icon="flag"></fa-icon>
+                        <span jhiTranslate="global.menu.continent">Continent</span>
+                    </span>
+                </a>
+            </li>
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
                         <span jhiTranslate="global.menu.entities.main">

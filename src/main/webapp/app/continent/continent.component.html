@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="display-4" jhiTranslate="continent">Continent</h1>
+
+        <ul>
+            <li><a [routerLink]="['/continent', 'africa', 'view' ]">Africa</a></li>
+            <li><a [routerLink]="['/continent', 'americas', 'view' ]">Americas</a></li>
+            <li><a [routerLink]="['/continent', 'asia', 'view' ]">Asia</a></li>
+            <li><a [routerLink]="['/continent', 'europe', 'view' ]">Europe</a></li>
+            <li><a [routerLink]="['/continent', 'oceania', 'view' ]">Oceania</a></li>
+        </ul>
+        <ul>
+            <li *ngFor="let continent of continents"><a [routerLink]="['/continent', continent.name, 'view' ]">{{continent.name}}</a></li>
+        </ul>
+    </div>
+</div>

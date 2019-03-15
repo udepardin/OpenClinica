@@ -19,8 +19,8 @@ import { OpenClinicaAccountModule } from './account/account.module';
 import { OpenClinicaEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+import { OpenClinicaContinentModule } from './continent/continent.module';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -35,6 +35,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         OpenClinicaSharedModule.forRoot(),
         OpenClinicaCoreModule,
         OpenClinicaHomeModule,
+        OpenClinicaContinentModule,
         OpenClinicaAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         OpenClinicaEntityModule,

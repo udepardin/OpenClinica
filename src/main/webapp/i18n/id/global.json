@@ -1,11 +1,11 @@
 {
     "global": {
         "title": "OpenClinica",
-        "browsehappy":
-            "Anda menggunakan peramban versi lama. Silakan <a href=\"http://browsehappy.com/?locale=en\">perbaharui peramban anda</a> untuk meningkatkan kenyamanan anda.",
+        "browsehappy": "Anda menggunakan peramban versi lama. Silakan <a href=\"http://browsehappy.com/?locale=en\">perbaharui peramban anda</a> untuk meningkatkan kenyamanan anda.",
         "menu": {
             "home": "Beranda",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "continent": "Benua",
             "entities": {
                 "main": "Entitas",
                 "author": "Author",
@@ -53,8 +53,7 @@
                 "authenticated": {
                     "prefix": "Jika anda ingin ",
                     "link": "masuk",
-                    "suffix":
-                        ", anda bisa coba menggunakan akun yang sudah ada:<br/>- Administrator (username=\"admin\" and password=\"admin\") <br/>- User (username=\"user\" and password=\"user\")."
+                    "suffix": ", anda bisa coba menggunakan akun yang sudah ada:<br/>- Administrator (username=\"admin\" and password=\"admin\") <br/>- User (username=\"user\" and password=\"user\")."
                 },
                 "register": {
                     "noaccount": "Anda belum punya akun?",
@@ -135,5 +134,7 @@
         "idexists": "{{ entityName }} yang baru tidak boleh menggunakan id yang sudah ada",
         "idnull": "ID Tidak Valid"
     },
-    "footer": "Ini bagian footer"
+    "footer": "Ini bagian footer",
+    "continent": "Benua",
+    "country": "Negara"
 }
