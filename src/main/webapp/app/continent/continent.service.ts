@@ -12,12 +12,12 @@ export class ContinentService {
     public resourceUrl = 'https://restcountries.eu/rest/v2';
     constructor(private http: HttpClient) {}
 
-    getContinents(): Observable<HttpResponse<any[]>> {
-        return this.http.get<any[]>('content/json/continent.json', { observe: 'response' });
+    getContinents(): Observable<any[]> {
+        return this.http.get<any[]>('content/json/continent.json' /*, { observe: 'response' }*/);
     }
 
-    getCountries(continentname: string): Observable<ContinentResponseType> {
-        return this.http.get<ICountry[]>(`${this.resourceUrl}/region/${continentname}`, { observe: 'response' });
+    getCountries(continentname: string): Observable<any[]> /*Observable<ContinentResponseType>*/ {
+        return this.http.get<ICountry[]>(`${this.resourceUrl}/region/${continentname}` /*, { observe: 'response' }*/);
     }
 
     getCountryDetail(countrycode: string): Observable<HttpResponse<any>> {

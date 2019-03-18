@@ -34,7 +34,7 @@ export class ContinentCountryComponent implements OnInit {
             this.search();
         } else {
             // kl kosong tidak ada isi load semua data
-            this.continentService.getCountries(this.ContinentName).subscribe(response => (this.countries = response.body));
+            this.continentService.getCountries(this.ContinentName).subscribe((responses: any[]) => (this.countries = responses));
         }
     }
 
@@ -44,14 +44,12 @@ export class ContinentCountryComponent implements OnInit {
 
     search() {
         this.continentService.getCountryByName(this.SearchKey).subscribe(response => (this.countries = response.body));
-        // localStorage.setItem('Searchkey', this.SearchKey);
         this.localStorageService.store(COUNTRY_SEARCH, this.SearchKey);
     }
 
     clear() {
         this.SearchKey = '';
-        // localStorage.removeItem('Searchkey');
         this.localStorageService.clear(COUNTRY_SEARCH);
-        this.continentService.getCountries(this.ContinentName).subscribe(response => (this.countries = response.body));
+        this.continentService.getCountries(this.ContinentName).subscribe((responses: any[]) => (this.countries = responses));
     }
 }
