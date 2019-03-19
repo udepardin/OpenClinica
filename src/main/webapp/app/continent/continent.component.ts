@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from 'app/core';
 import { ContinentService } from './continent.service';
-import { mergeMap, flatMap, concatMap, map } from 'rxjs/operators';
-import { threadId } from 'worker_threads';
-import { Country } from './continent.model';
+import { mergeMap, flatMap, concatMap, map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { Observable, Subject, merge } from 'rxjs';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-continent',
@@ -12,47 +12,59 @@ import { Country } from './continent.model';
 export class ContinentComponent implements OnInit {
     currentAccount: any;
     continents: any[];
-    countries: any[];
+    model: any;
+    search: any;
+    formatter: any;
+
+    @ViewChild('instance') instance: NgbTypeahead;
+    focus$ = new Subject<string>();
+    click$ = new Subject<string>();
+
     constructor(protected accountService: AccountService, protected continentService: ContinentService) {}
 
     ngOnInit() {
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
-        // this.continentService.getContinents().subscribe(response => (this.continents = response.body));
-        this.continentService
-            .getContinents()
-            .pipe(
-                map((continents: any[]) => {
-                    console.log(continents);
-                    continents.map(continent => {
-                        continent.title = 'Benua';
-                        this.continentService
-                            .getCountries(continent.name)
-                            .pipe(
-                                map((countries: any[]) => {
-                                    console.log(countries);
-                                    countries.filter(country => {
-                                        continent.country = country.name;
-                                        return country;
-                                    });
-                                    return countries;
-                                })
-                            )
-                            .subscribe((responseCountries: any[]) => {
-                                this.countries = responseCountries;
-                            });
-                        return continent;
-                    });
-                    return continents;
-                })
-            )
-            .subscribe((responses: any[]) => {
-                // responses.map(response => {
-                //     this.continentService.getCountries(response.name)
-                //         .subscribe(responseCountry => this.countries = responseCountry.body);
-                // });
+        this.continentService.getContinents().subscribe((responses: any[]) => {
+            this.continents = responses;
+        });
+        this.search = (text$: Observable<string>) => {
+            const debouncedText$ = text$.pipe(
+                debounceTime(200),
+                distinctUntilChanged()
+            );
+            const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
+            const inputFocus$ = this.focus$;
+
+            return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+                map(term =>
+                    (term === ''
+                        ? this.continents
+                        : this.continents.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+                    ).slice(0, 10)
+                )
+            );
+        };
+        this.formatter = (x: { name: string }) => x.name;
+    }
+
+    searchContinent() {
+        if (this.model === '') {
+            this.continentService.getContinents().subscribe((responses: any[]) => {
                 this.continents = responses;
             });
+        } else {
+            this.continentService
+                .getContinents()
+                .pipe(
+                    map((continents: any[]) => {
+                        return continents.filter(continent => continent.name === this.model.name);
+                    })
+                )
+                .subscribe((responses: any[]) => {
+                    this.continents = responses;
+                });
+        }
     }
 }

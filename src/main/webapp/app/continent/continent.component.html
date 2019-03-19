@@ -8,6 +8,42 @@
             <li><a [routerLink]="['/continent', 'europe', 'view' ]">Europe</a></li>
             <li><a [routerLink]="['/continent', 'oceania', 'view' ]">Oceania</a></li>
         </ul> -->
+        <ng-template #rt let-r="result" let-t="term">
+            <!-- <img class="mr-1" style="width: 16px"> -->
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </ng-template>
+        
+        <label for="typeahead-template">Search for a Continent:</label>
+        <input 
+            id="typeahead-template" 
+            type="text" class="form-control" 
+            [(ngModel)]="model" 
+            [ngbTypeahead]="search" 
+            [resultTemplate]="rt"
+            [inputFormatter]="formatter" 
+            (keyup)="searchContinent()"
+            (focus)="focus$.next($event.target.value)"
+            (click)="click$.next($event.target.value)"
+            #instance="ngbTypeahead"
+        />
+        <!-- <button 
+            id="enter"
+            type="submit"
+            class="btn btn-info btn-sm"
+            (click)="searchContinent()">
+            <fa-icon [icon]="'eye'"></fa-icon>
+            <span class="d-none d-md-inline">Search</span>
+        </button> -->
+        <script type="text/javascript">
+            var input=document.getElementById("typeahead-template");
+            input.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("enter").click();
+                }
+            });
+        </script>      
+        <br>
         <ul>
             <li *ngFor="let continent of continents"><a [routerLink]="['/continent', continent.name, 'view' ]">{{continent.country}} {{continent.name}}</a></li>
         </ul>
