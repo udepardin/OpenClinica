@@ -7,6 +7,8 @@ import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { mergeMap, flatMap, concatMap, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { counter } from '@fortawesome/fontawesome-svg-core';
 
 const COUNTRY_SEARCH = 'SearchKey';
 
@@ -26,7 +28,8 @@ export class ContinentCountryComponent implements OnInit {
     constructor(
         protected activatedRoute: ActivatedRoute,
         protected continentService: ContinentService,
-        protected localStorageService: LocalStorageService
+        protected localStorageService: LocalStorageService,
+        protected router: Router
     ) {}
 
     ngOnInit() {
@@ -57,7 +60,9 @@ export class ContinentCountryComponent implements OnInit {
     }
 
     searchCountry() {
-        this.continentService.getCountryByName(this.SearchKey).subscribe(response => (this.countries = response.body));
+        this.continentService.getCountryByName(this.SearchKey).subscribe((response: any) => {
+            this.countries = response;
+        });
         this.localStorageService.store(COUNTRY_SEARCH, this.SearchKey);
     }
 
@@ -65,7 +70,19 @@ export class ContinentCountryComponent implements OnInit {
         if (this.model === '') {
             this.continentService.getCountries(this.ContinentName).subscribe((responses: any[]) => (this.countries = responses));
         } else {
-            this.continentService.getCountryByName(this.model.name).subscribe(response => (this.countries = response.body));
+            this.continentService
+                .getCountryByName(this.model.name)
+                .pipe(
+                    map((countries: any[]) => {
+                        countries.map(country => {
+                            return this.router.navigate(['/continent/' + this.ContinentName + '/' + country.alpha3Code + '/view']);
+                        });
+                        return countries;
+                    })
+                )
+                .subscribe((response: any) => {
+                    this.countries = response;
+                });
         }
     }
 

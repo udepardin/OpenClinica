@@ -29,13 +29,7 @@
             </ng-template>                
             <label for="typeahead-template">Search for a Country:</label>
             <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
-                    [inputFormatter]="formatter" (keyup)="searchCountryTypeahead()" />
-            <!-- <button type="submit"
-                class="btn btn-info btn-sm"
-                (click)="searchCountryTypeahead()">
-                <fa-icon [icon]="'eye'"></fa-icon>
-                <span class="d-none d-md-inline">Search</span>
-            </button>              -->
+                    [inputFormatter]="formatter" (keyup.enter)="searchCountryTypeahead()" />
             <table class="table table-sm table-striped table-bordered">
                 <thead>
                 <tr title="click to order">
