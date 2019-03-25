@@ -24,11 +24,11 @@ export class ContinentService {
         return this.http.get<any>(`${this.resourceUrl}/alpha/${countrycode}`, { observe: 'response' });
     }
 
-    getCountryByName(countryname: string): Observable<HttpResponse<any[]>> {
+    getCountryByName(countryname: string): Observable<any[]> /*Observable<HttpResponse<any[]>>*/ {
         if (countryname !== '') {
-            return this.http.get<any[]>(`${this.resourceUrl}/name/${countryname}`, { observe: 'response' });
+            return this.http.get<any[]>(`${this.resourceUrl}/name/${countryname}` /*, { observe: 'response' }*/);
         } else {
-            return this.http.get<any[]>(`${this.resourceUrl}/all`, { observe: 'response' });
+            return this.http.get<any[]>(`${this.resourceUrl}/all` /*, { observe: 'response' }*/);
         }
     }
 }

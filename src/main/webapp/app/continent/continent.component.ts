@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from 'app/core';
 import { ContinentService } from './continent.service';
-import { mergeMap, flatMap, concatMap, map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Observable, Subject, merge } from 'rxjs';
-import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { mergeMap, flatMap, concatMap, map, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { Observable, Subject, merge, iif } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-continent',
@@ -14,13 +14,10 @@ export class ContinentComponent implements OnInit {
     continents: any[];
     model: any;
     search: any;
+    searchAll: any;
     formatter: any;
 
-    @ViewChild('instance') instance: NgbTypeahead;
-    focus$ = new Subject<string>();
-    click$ = new Subject<string>();
-
-    constructor(protected accountService: AccountService, protected continentService: ContinentService) {}
+    constructor(protected accountService: AccountService, protected continentService: ContinentService, protected router: Router) {}
 
     ngOnInit() {
         this.accountService.identity().then(account => {
@@ -29,31 +26,21 @@ export class ContinentComponent implements OnInit {
         this.continentService.getContinents().subscribe((responses: any[]) => {
             this.continents = responses;
         });
-        this.search = (text$: Observable<string>) => {
-            const debouncedText$ = text$.pipe(
-                debounceTime(200),
-                distinctUntilChanged()
-            );
-            const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-            const inputFocus$ = this.focus$;
 
-            return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+        this.search = (text$: Observable<string>) =>
+            text$.pipe(
+                debounceTime(200),
+                distinctUntilChanged(),
                 map(term =>
-                    (term === ''
-                        ? this.continents
-                        : this.continents.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
-                    ).slice(0, 10)
+                    term === '' ? [] : this.continents.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
                 )
             );
-        };
         this.formatter = (x: { name: string }) => x.name;
     }
 
     searchContinent() {
         if (this.model === '') {
-            this.continentService.getContinents().subscribe((responses: any[]) => {
-                this.continents = responses;
-            });
+            this.continentService.getContinents().subscribe((responses: any[]) => (this.continents = responses));
         } else {
             this.continentService
                 .getContinents()
@@ -62,9 +49,8 @@ export class ContinentComponent implements OnInit {
                         return continents.filter(continent => continent.name === this.model.name);
                     })
                 )
-                .subscribe((responses: any[]) => {
-                    this.continents = responses;
-                });
+                .subscribe((responses: any[]) => (this.continents = responses));
+            this.router.navigate(['/continent/' + this.model.name + '/view']);
         }
     }
 }
