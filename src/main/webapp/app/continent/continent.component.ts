@@ -39,22 +39,18 @@ export class ContinentComponent implements OnInit {
     }
 
     searchContinent() {
-        if (this.model === '') {
+        if (this.model === '' || this.continents.filter(continent => continent.name === this.model.name).length <= 0) {
             this.continentService.getContinents().subscribe((responses: any[]) => (this.continents = responses));
         } else {
-            if (this.continents.filter(continent => continent.name === this.model.name).length > 0) {
-                this.continentService
-                    .getContinents()
-                    .pipe(
-                        map((continents: any[]) => {
-                            return continents.filter(continent => continent.name === this.model.name);
-                        })
-                    )
-                    .subscribe((responses: any[]) => (this.continents = responses));
-                this.router.navigate(['/continent/' + this.model.name + '/view']);
-            } else {
-                this.continentService.getContinents().subscribe((responses: any[]) => (this.continents = responses));
-            }
+            this.continentService
+                .getContinents()
+                .pipe(
+                    map((continents: any[]) => {
+                        return continents.filter(continent => continent.name === this.model.name);
+                    })
+                )
+                .subscribe((responses: any[]) => (this.continents = responses));
+            this.router.navigate(['/continent/' + this.model.name + '/view']);
         }
     }
 }
