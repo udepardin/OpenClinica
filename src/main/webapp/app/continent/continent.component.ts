@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-continent',
-    templateUrl: './continent.component.html'
+    templateUrl: './continent.component.html',
+    styleUrls: ['continent.scss']
 })
 export class ContinentComponent implements OnInit {
     currentAccount: any;

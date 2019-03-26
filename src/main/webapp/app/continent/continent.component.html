@@ -1,15 +1,7 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-9">
         <h1 class="display-4" jhiTranslate="continent">Continent</h1>
-        <!-- <ul>
-            <li><a [routerLink]="['/continent', 'africa', 'view' ]">Africa</a></li>
-            <li><a [routerLink]="['/continent', 'americas', 'view' ]">Americas</a></li>
-            <li><a [routerLink]="['/continent', 'asia', 'view' ]">Asia</a></li>
-            <li><a [routerLink]="['/continent', 'europe', 'view' ]">Europe</a></li>
-            <li><a [routerLink]="['/continent', 'oceania', 'view' ]">Oceania</a></li>
-        </ul> -->
         <ng-template #rt let-r="result" let-t="term">
-            <!-- <img class="mr-1" style="width: 16px"> -->
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
         </ng-template>                
         <label for="typeahead-template">Search for a Continent:</label>
@@ -20,4 +12,26 @@
             <li *ngFor="let continent of (continents)"><a [routerLink]="['/continent', continent.name, 'view' ]">{{continent.name}}</a></li>
         </ul>
     </div>
+</div> -->
+<div>
+    <nav class="navbar navbar2 text-white">
+        <div>
+            <h2><span>Continents</span></h2>
+        </div>
+    </nav>
+    <div id="continents-container" class="container-fluid">
+        <ng-template #rt let-r="result" let-t="term">
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </ng-template>                
+        <label for="typeahead-template">Search for a Continent:</label>
+        <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
+                [inputFormatter]="formatter" (keyup.enter)="searchContinent()" />
+        <br>        
+        <div class="row align-items-start">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 justify-content-start" *ngFor="let continent of continents">
+                <jhi-continent-item [continent]="continent"></jhi-continent-item>
+            </div>
+        </div>
+    </div>
 </div>
+    

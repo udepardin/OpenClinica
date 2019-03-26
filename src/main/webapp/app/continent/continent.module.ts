@@ -6,12 +6,13 @@ import { continentRoute } from './';
 import { ContinentComponent } from './';
 import { ContinentCountryComponent } from './';
 import { ContinentCountryDetailComponent } from './';
+import { ContinentItemComponent } from './';
 
 @NgModule({
     imports: [OpenClinicaSharedModule, RouterModule.forChild(continentRoute)],
-    declarations: [ContinentComponent, ContinentCountryComponent, ContinentCountryDetailComponent],
+    declarations: [ContinentComponent, ContinentCountryComponent, ContinentCountryDetailComponent, ContinentItemComponent],
     providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-    entryComponents: [ContinentComponent, ContinentCountryComponent, ContinentCountryDetailComponent],
+    entryComponents: [ContinentComponent, ContinentCountryComponent, ContinentCountryDetailComponent, ContinentItemComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OpenClinicaContinentModule {}

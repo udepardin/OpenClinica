@@ -1,0 +1,30 @@
+<div class="continent card">
+    <div class="card-body">
+        <div class="card-subtitle font-weight-bold subtitle">
+            <p>
+                <span>ID</span> {{continent.id}}
+                <br>
+                <span>
+                    <span>Not yet published to Production Environment</span>
+                </span>
+            </p>
+        </div>
+        <h4 class="card-title">{{continent.name}}</h4>
+        <div class="card-text text-white text">
+            <p>{{continent.name}}</p>
+            <p></p>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-center mt-2">
+            <div ngbDropdown class="d-inline-block" #settingsDropDown="ngbDropdown">
+                <button class="btn btn-secondary btn-settings" id="btnSettings" ngbDropdownToggle>
+                    View
+                </button>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="btnSettings">
+                    <a class="dropdown-item" [routerLink]="['/continent', continent.name, 'view' ]"><span>Countries</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
