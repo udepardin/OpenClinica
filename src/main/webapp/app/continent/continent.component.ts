@@ -14,7 +14,6 @@ export class ContinentComponent implements OnInit {
     continents: any[];
     model: any;
     search: any;
-    searchAll: any;
     formatter: any;
 
     constructor(protected accountService: AccountService, protected continentService: ContinentService, protected router: Router) {}
