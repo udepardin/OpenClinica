@@ -14,7 +14,8 @@ const COUNTRY_SEARCH = 'SearchKey';
 
 @Component({
     selector: 'jhi-continent-country',
-    templateUrl: './continent-country.component.html'
+    templateUrl: './continent-country.component.html',
+    styleUrls: ['continent.scss']
 })
 export class ContinentCountryComponent implements OnInit {
     countries: ICountry[];
@@ -39,7 +40,7 @@ export class ContinentCountryComponent implements OnInit {
             // kl ada simpen di vAriable SearchKey
             this.SearchKey = this.localStorageService.retrieve(COUNTRY_SEARCH);
             // setelah disimpan load search(SearchKey)
-            this.search();
+            this.searchCountry();
         } else {
             // kl kosong tidak ada isi load semua data
             this.continentService.getCountries(this.ContinentName).subscribe((responses: any[]) => (this.countries = responses));
@@ -60,9 +61,16 @@ export class ContinentCountryComponent implements OnInit {
     }
 
     searchCountry() {
-        this.continentService.getCountryByName(this.SearchKey).subscribe((response: any) => {
-            this.countries = response;
-        });
+        this.continentService
+            .getCountryByName(this.SearchKey)
+            .pipe(
+                map((countries: any[]) => {
+                    return countries.filter(country => country.region === this.ContinentName);
+                })
+            )
+            .subscribe((response: any) => {
+                this.countries = response;
+            });
         this.localStorageService.store(COUNTRY_SEARCH, this.SearchKey);
     }
 

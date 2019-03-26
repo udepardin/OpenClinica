@@ -1,77 +1,39 @@
-<div class="row justify-content-left">
-    <div class="col-8">
-            <h2><span>Benua</span> {{ContinentName}}
-                <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-                </button>
-            </h2>
-            <!-- <form> -->
-                <span>Search (by Name)</span> <input type="text" [(ngModel)]="SearchKey" class="form-control" value={{SearchKey}}>
-                <button type="submit"
-                        class="btn btn-info btn-sm"
-                        (click)="searchCountry()">
-                    <fa-icon [icon]="'eye'"></fa-icon>
-                    <span class="d-none d-md-inline">Search</span>
-                </button>
-                <button type="submit"
-                        class="btn btn-info btn-sm"
-                        (click)="clear()">
-                    <fa-icon [icon]="'eye'"></fa-icon>
-                    <span class="d-none d-md-inline">Clear</span>
-                </button>
-            <!-- </form> -->
+<div>
+    <nav class="navbar navbar2 text-white">
+        <div>
+            <h2><span>Benua </span>{{ContinentName}}</h2>
+        </div>
+    </nav>
+    <div id="countries-container" class="container-fluid">
+            <span>Search (by Name)</span> <input type="text" [(ngModel)]="SearchKey" class="form-control" value={{SearchKey}}>
             <br>
-            <ng-template #rt let-r="result" let-t="term">
-                <!-- <img class="mr-1" style="width: 16px"> -->
-                <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
-            </ng-template>                
-            <label for="typeahead-template">Search for a Country:</label>
-            <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
-                    [inputFormatter]="formatter" (keyup.enter)="searchCountryTypeahead()" />
-            <table class="table table-sm table-striped table-bordered">
-                <thead>
-                <tr title="click to order">
-                    <th>Country Code</th>
-                    <th>Country Name</th>
-                    <th>Population</th>
-                    <th></th>
-                </tr>
-                </thead>
-        
-                <tr *ngFor="let country of (countries | filter:{region:ContinentName})">
-                    <td><a [routerLink]="['/continent',ContinentName, country.alpha3Code, 'view' ]"><small>{{country.alpha3Code}}</small></td>
-                    <td><small>{{country.name}}</small></a></td>
-                    <td><small>{{country.population}}</small></td>
-                    <td class="text-right">
-                            <div class="btn-group flex-btn-group-container">
-                                <button type="submit"
-                                        [routerLink]="['/continent',ContinentName, country.alpha3Code, 'view' ]"
-                                        class="btn btn-info btn-sm">
-                                    <fa-icon [icon]="'eye'"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                                </button>
-                            </div>
-                        </td>
-                </tr>
-            </table>
-        <!-- <div *ngIf="continent">
-            <h2><span>Benua</span> {{continent.name}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="openClinicaApp.author.name">Name</span></dt>
-                <dd *ngFor="let logger of (loggers | pureFilter:filter:'name' | orderBy:orderProp:reverse)">
-                    <span>{{co.name}}</span>
-                </dd>
-            </dl>
-
             <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    class="btn btn-info btn-sm"
+                    (click)="searchCountry()">
+                <fa-icon [icon]="'eye'"></fa-icon>
+                <span class="d-none d-md-inline">Search</span>
             </button>
-        </div> -->
+            <button type="submit"
+                    class="btn btn-info btn-sm"
+                    (click)="clear()">
+                <fa-icon [icon]="'eye'"></fa-icon>
+                <span class="d-none d-md-inline">Clear</span>
+            </button>
+        <!-- </form> -->
+        <br>
+        <br>
+        <ng-template #rt let-r="result" let-t="term">
+            <!-- <img class="mr-1" style="width: 16px"> -->
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </ng-template>                
+        <label for="typeahead-template">Search for a Country:</label>
+        <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
+                [inputFormatter]="formatter" (keyup.enter)="searchCountryTypeahead()" />   
+        <br>        
+        <div class="row align-items-start">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 justify-content-start" *ngFor="let country of countries">
+                    <jhi-continent-country-item [country]="country"></jhi-continent-country-item>
+            </div>
+        </div>
     </div>
 </div>

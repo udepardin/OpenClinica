@@ -1,0 +1,82 @@
+/* ==========================================================================
+start Continent style
+========================================================================== */
+#countries-container {
+    position: relative;
+}
+
+.country {
+    min-width: 225px;
+    min-height: 353px;
+    margin-bottom: 40px;
+}
+
+.country > .card-body {
+    min-height: 256px;
+    max-height: 256px;
+    overflow-y: hidden;
+}
+
+.country > .card-body-create {
+    max-height: none;
+}
+
+.invite-user-choice-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+}
+
+.invite-user-choice-container > button {
+    font-size: 18px;
+}
+
+.invite-user-choice-container > span {
+    font-size: 15px;
+    margin: 5px 0;
+}
+
+.subtitle {
+    font-size: 0.75rem;
+    color: #58585b;
+    line-height: 0.9rem;
+}
+
+.text {
+    font-size: 0.9rem;
+    line-height: 1rem;
+}
+
+.btn-container-1 {
+    // justify-content: space-between;
+
+    .dropdown {
+        button {
+            margin-right: 0.5rem;
+        }
+    }
+
+    // .btn-action {
+    //     width: 100%;
+    // }
+
+    .btn-settings {
+        min-width: 56px;
+    }
+
+    .btn-design {
+        margin-right: 0.5rem;
+        min-width: 72px;
+    }
+
+    .btn-share {
+        min-width: 95px;
+    }
+}
+
+.link-add-country {
+    font-weight: 100;
+}
