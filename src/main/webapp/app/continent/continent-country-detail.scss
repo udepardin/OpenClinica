@@ -1,0 +1,116 @@
+#continent-country-detail-container {
+    position: relative;
+    overflow-x: hidden;
+    min-height: 360px;
+}
+
+.continent-country-detail-navs {
+    margin-bottom: 30px;
+}
+
+.continent-country-detail-section {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.continent-country-detail-section-header {
+    padding-bottom: 10px;
+}
+
+.continent-country-detail-section-header.with-underline {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ccc;
+}
+
+.ui-datatable-thead th {
+    color: #464a4c;
+    background-color: #eceeef;
+}
+
+.ui-paginator {
+    text-align: center;
+}
+
+.ui-paginator-page {
+    margin: 0 5px;
+}
+
+.btn-action {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#recent-activity h4.title {
+    margin: 20px 0;
+}
+
+.recent-activity-item {
+    margin-bottom: 20px;
+}
+
+.ui-paginator {
+    border: none !important;
+}
+
+#content.is-sidebar-open {
+    right: 250px;
+}
+
+.tab-pane {
+    padding: 0 15px 15px 15px;
+}
+
+.action-buttons > :not(:last-child) {
+    margin-right: 0.25rem;
+}
+
+.tab-pane {
+    position: relative;
+}
+
+div#users thead th {
+    border-bottom: 2px solid #eceeef !important;
+    color: #464a4c !important;
+    background-color: #eceeef !important;
+    border-top: 1px solid #eceeef !important;
+    border-color: #eceeef !important;
+    font-weight: bold !important;
+    text-align: left;
+}
+
+div#users tbody tr {
+    border-color: #fff !important;
+    color: #464a4c !important;
+    background-color: #fff !important;
+    border-top: 1px solid #eceeef !important;
+    text-align: left;
+}
+
+#properties,
+#participantIdSetting {
+    h3 {
+        display: inline;
+    }
+
+    .btn-edit {
+        margin-top: -1.3rem;
+        margin-left: 0.5rem;
+    }
+
+    .row {
+        margin-bottom: 0.5rem;
+    }
+}
+
+table#table-users td.td-actions {
+    min-width: 24rem;
+}
+
+#publish-history {
+    .nav-link {
+        display: inline-block;
+        padding: 0;
+        text-decoration: underline;
+        margin-left: 1rem;
+    }
+}

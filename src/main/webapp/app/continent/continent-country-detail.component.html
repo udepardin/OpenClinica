@@ -1,41 +1,118 @@
-<div>
-    <div class="col-8">
-        <div *ngIf="country">
-            <h2><span>Country Code : </span> {{country.alpha3Code}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Name</span></dt>
-                <dd>
-                    <span>{{country.name}}</span>
-                </dd>
-                <dt><span>Capital</span></dt>
-                <dd>
-                    <span>{{country.capital}}</span>
-                </dd>
-                <dt><span>Region</span></dt>
-                <dd>
-                    <span>{{country.region}}</span>
-                </dd>
-                <dt><span>Sub Region</span></dt>
-                <dd>
-                    <span>{{country.subregion}}</span>
-                </dd>
-                <dt><span>Population</span></dt>
-                <dd>
-                    <span>{{country.population}}</span>
-                </dd>
-                <dt><span>Demonym</span></dt>
-                <dd>
-                    <span>{{country.demonym}}</span>
-                </dd>
-            </dl>
+<div id="continent-country-detail-container">
+        <nav class="navbar2 text-white">
+            <div class="row no-gutters">
+                <div class="col-7"><h2><span>{{country?.alpha3Code}} ({{country?.name}})</span></h2></div>
+                <div class="col-5 text-right">
+                    <div>
+                        <button type="submit"
+                            (click)="previousState()"
+                            class="btn btn-secondary">
+                            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>    
+        
+        <div class="container-fluid">
+            <div id="content">
+                <ul class="nav nav-tabs">
+                    <li *ngFor="let tab of pageTabs" class="nav-item">
+                        <a class="nav-link" [class.active]="tab.id == selectedTabId" (click)="clickTab(tab.id)">
+                            <!-- <ng-template #othersTab> -->
+                                <span class="text-capitalize">{{tab?.name}}</span>
+                            <!-- </ng-template> -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <!-- <ng-template #othersContent> -->
+                    <div *ngIf="selectedTabId == 'CountryDetail1'" id="{{selectedTabId}}" class="tab-pane active" role="tabpanel">
+                        <div id="properties" class="continent-country-detail-section">
+                            <div class="continent-country-detail-section-header with-underline row no-gutters">
+                                <div class="col">
+                                    <h3>Country Detail 1</h3>
+                                </div>
+                            </div>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span>ID</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.alpha3Code}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span>Name</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.name}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-sm-2">
+                                    <span>Capital</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.capital}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span>Region</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.subregion}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span>Demonym</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.demonym}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span>Flag</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    {{country.flag}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedTabId == 'CountryDetail2'" id="{{selectedTabId}}" class="tab-pane active" role="tabpanel">
+                            <div id="properties" class="continent-country-detail-section">
+                                <div class="continent-country-detail-section-header with-underline row no-gutters">
+                                    <div class="col">
+                                        <h3>Country Detail 2</h3>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <span>ID 2</span>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{country.alpha2Code}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <span>Area</span>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{country.area}}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                <!-- </ng-template> -->
+            </div>
         </div>
-    </div>
 </div>
